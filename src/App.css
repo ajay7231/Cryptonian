@@ -80,10 +80,13 @@
     text-align: center;
     padding: 2rem;
     width: 100%;
+    display: none;
+  }
+  .nav-menu.active .nav-links {
     display: table;
   }
 
-  .nav-links:hover {
+  .nav-links.active:hover {
     background: #6668f4;
     border-radius: 0;
   }
@@ -102,4 +105,48 @@
     font-size: 2rem;
     cursor: pointer;
   }
+}
+
+/* Home */
+
+.home-heading-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+}
+.home-title {
+  padding: 20px;
+}
+.heading{
+  padding: 20px;
+}
+.home-stats{
+  padding: 20px;
+}
+@media screen and (max-width: 500px) {
+  .heading {
+    margin-top: 20px;
+  }
+}
+@media screen and (max-width: 800px) {
+  .home-title {
+    font-size: 1.4rem !important;
+  }
+  .show-more {
+    font-size: 1.3rem !important;
+  }
+}
+
+/*Cryptocurrencies*/
+
+.crypto-card-container {
+  min-height: 65vh !important;
+  padding: 20px;
+}
+.crypto-card {
+  min-width: 250px;
+}
+.crypto-card .crypto-image {
+  width: 35px;
 }
