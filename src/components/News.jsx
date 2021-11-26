@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useGetCryptoNewsQuery } from "../services/cryptoNewsApi";
 import { Grid,Typography,Loader } from "../components";
 import { Card , Avatar } from "antd";
@@ -18,7 +18,7 @@ const News = ({ simplified }) => {
 
   return (
     <React.Fragment>
-      <Grid container columnSpacing={4} rowSpacing={4}>
+      <Grid container columnSpacing={4} rowSpacing={4} className="news-container">
         {cryptoNews.value.map((news) => (
           <Grid item xs={12} sm={6} lg={4} key={news.id}>
             <Card hoverable>

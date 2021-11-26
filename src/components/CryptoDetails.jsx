@@ -9,7 +9,6 @@ import {
   Typography,
   AccountBalanceOutlinedIcon,
   MonetizationOnOutlinedIcon,
-  AutoGraphOutlinedIcon,
   ErrorOutlineOutlinedIcon,
   NotInterestedOutlinedIcon,
   TrendingUpOutlinedIcon,
@@ -101,7 +100,7 @@ const CryptoDetails = () => {
       <Grid item className="coin-detail-container">
         <Grid item className="coin-heading-container">
           <Typography variant="h3" className="coin-name">
-            {cryptoDetails.name} ({cryptoDetails.slug}) Price
+            {cryptoDetails.name} ({cryptoDetails.slug.split('-')[1]}) Price
           </Typography>
           <p>
             {cryptoDetails.name} live price in USD. View value statistics,
