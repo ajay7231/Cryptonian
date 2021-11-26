@@ -27,6 +27,7 @@
     rgb(110, 94, 254),
     rgba(73, 63, 252, 1) 100%
   );
+  /* position: fixed; */
   height: 80px;
   display: flex;
   justify-content: center;
@@ -166,6 +167,10 @@
     width: 250px;
 }
 /*News*/
+
+.news-container{
+  padding:20px;
+}
 
 .news-image-container {
   display: flex !important;

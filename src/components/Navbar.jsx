@@ -21,7 +21,7 @@ const Navbar = () => {
           <Link to="/">Home</Link>
         </li>
         <li key="2" className="nav-links">
-          <Link   to="/cryptocurrencies">Cryptocurrencies</Link>
+          <Link to="/cryptocurrencies">Cryptocurrencies</Link>
         </li>
         <li key="3" className="nav-links">
           <Link to="/news">News</Link>
