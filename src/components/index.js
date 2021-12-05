@@ -30,5 +30,5 @@ export { default as News } from "./News";
 export { default as Home } from "./Home";
 export { default as CryptoDetails } from "./CryptoDetails";
 export { default as CryptoLineChart } from "./CryptoLineChart";
-export { default as Loader } from "./Loader"
-export { default as CryptoPrediction} from "./CryptoPrediction"
+export { default as Loader } from "./Loader";
+export { default as CryptoPrediction } from "./CryptoPrediction";

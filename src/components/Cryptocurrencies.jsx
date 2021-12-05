@@ -1,11 +1,17 @@
-import React, { useState,useEffect } from "react";
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Grid } from "../components";
-import { useGetCryptoCoinsQuery } from '../services/cryptoApi'
+import { useGetCryptoCoinsQuery } from "../services/cryptoApi";
 import { getReqPrecision } from "../services/utils";
-import { Card,Input,Select } from "antd";
+import { Card, Input, Select } from "antd";
 import millify from "millify";
 import Loader from "./Loader";
+
+/**
+ *
+ * @param {object} props
+ * @returns {React.Component}
+ */
 
 const Cryptocurrencies = ({ simplified }) => {
   const count = simplified ? 10 : 100;
@@ -14,22 +20,19 @@ const Cryptocurrencies = ({ simplified }) => {
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("relevance");
   console.log(cryptoList);
-  
+
   useEffect(() => {
     setCryptos(cryptoList?.data?.coins);
-    const filteredCryptos = cryptoList?.data?.coins.filter((coin) =>
-      coin.name.toLowerCase().includes(search.toLowerCase())
-    ).sort((a, b) => b[sort] - a[sort]);
-    // if (sort != '') {
-    //   filteredCryptos.sort((a, b) => { return b[sort] - a[sort] });
-    // }
+    const filteredCryptos = cryptoList?.data?.coins
+      .filter((coin) => coin.name.toLowerCase().includes(search.toLowerCase()))
+      .sort((a, b) => b[sort] - a[sort]);
+    
     setCryptos(filteredCryptos);
-
   }, [cryptoList, search, sort]);
 
-  const filters = ['relevance','price', 'marketCap', 'volume'];
+  const filters = ["relevance", "price", "marketCap", "volume"];
 
-  if (isFetching) return <Loader/>;
+  if (isFetching) return <Loader />;
   return (
     <React.Fragment>
       {!simplified ? (
@@ -37,7 +40,7 @@ const Cryptocurrencies = ({ simplified }) => {
           <Grid item md={6}>
             <Select
               showSearch
-              style={{ width: 200}}
+              style={{ width: 200 }}
               defaultValue="price"
               placeholder="Sort by"
               className="filter-by"
