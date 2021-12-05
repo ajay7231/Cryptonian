@@ -8,7 +8,6 @@ import { Statistic } from "antd";
 const Home = () => {
   const { data, isFetching } = useGetCryptoCoinsQuery(10);
   const globalStats = data?.data?.stats;
-  console.log(globalStats);
   if (isFetching) return <Loader/>;
   return (
     <React.Fragment>

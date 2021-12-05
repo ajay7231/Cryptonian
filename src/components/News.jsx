@@ -19,8 +19,8 @@ const News = ({ simplified }) => {
   return (
     <React.Fragment>
       <Grid container columnSpacing={4} rowSpacing={4} className="news-container">
-        {cryptoNews.value.map((news) => (
-          <Grid item xs={12} sm={6} lg={4} key={news.id}>
+        {cryptoNews.value.map((news,index) => (
+          <Grid item xs={12} sm={6} lg={4} key={index}>
             <Card hoverable>
               <a href={news.url} target="_blank" rel="noreferrer">
                 <div className="news-image-container">

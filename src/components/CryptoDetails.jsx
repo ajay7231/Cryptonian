@@ -136,7 +136,7 @@ const CryptoDetails = () => {
               </p>
             </Grid>
             {stats.map(({ icon, title, value }) => (
-              <Grid item className="coin-stats">
+              <Grid item className="coin-stats" key={title}>
                 <Grid item className="coin-stats-name">
                   <Typography variant="h6">{icon}</Typography>
                   <Typography variant="h6">{title}</Typography>
@@ -155,7 +155,7 @@ const CryptoDetails = () => {
               <p>An overview showing the statistics of all Cryptocurrencies</p>
             </Grid>
             {genericStats.map(({ icon, title, value }) => (
-              <Grid item className="coin-stats">
+              <Grid item className="coin-stats" key={title}>
                 <Grid item className="coin-stats-name">
                   <Typography variant="h6">{icon}</Typography>
                   <Typography variant="h6">{title}</Typography>
