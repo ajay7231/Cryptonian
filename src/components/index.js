@@ -8,7 +8,10 @@ export { default as Grid } from "@mui/material/Grid";
 export { default as Avatar } from "@mui/material/Avatar";
 
 //icons Exports
-
+export { default as FormControl } from "@mui/material/FormControl";
+export { default as InputLabel } from "@mui/material/InputLabel";
+export { default as MenuItem } from "@mui/material/MenuItem";
+export { default as MenuSelect } from "@mui/material/Select";
 export { default as Settings } from "@mui/icons-material/Settings";
 export { default as Logout } from "@mui/icons-material/Logout";
 export { default as MenuIcon } from "@mui/icons-material/Menu";

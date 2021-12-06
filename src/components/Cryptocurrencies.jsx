@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Grid } from "../components";
+import { Grid, FormControl, InputLabel, MenuSelect, MenuItem } from "../components";
+import Paper from "@mui/material/Paper";
+import InputBase from "@mui/material/InputBase";
+import IconButton from "@mui/material/IconButton";
+import SearchIcon from "@mui/icons-material/Search";
 import { useGetCryptoCoinsQuery } from "../services/cryptoApi";
 import { getReqPrecision } from "../services/utils";
-import { Card, Input, Select } from "antd";
+import { Card } from "antd";
 import millify from "millify";
 import Loader from "./Loader";
 
@@ -38,25 +42,44 @@ const Cryptocurrencies = ({ simplified }) => {
       {!simplified ? (
         <Grid container>
           <Grid item md={6}>
-            <Select
-              showSearch
-              style={{ width: 200 }}
-              defaultValue="price"
-              placeholder="Sort by"
-              className="filter-by"
-              onChange={(value) => setSort(value)}
+            <FormControl
+              style={{ width: "150px" }}
+              className="select-timeperiod"
             >
-              {filters.map((item) => (
-                <Select.Option key={item} value={item}></Select.Option>
-              ))}
-            </Select>
+              <InputLabel>Sort</InputLabel>
+              <MenuSelect
+                value={sort}
+                label="Sort"
+                onChange={(e) => setSort(e.target.value)}
+              >
+                {filters.map((item) => (
+                  <MenuItem key={item} value={item}>
+                    {item}
+                  </MenuItem>
+                ))}
+              </MenuSelect>
+            </FormControl>
           </Grid>
           <Grid item md={6}>
             <div className="search-crypto">
-              <Input
-                placeholder="Search Cryptocurrencies.."
-                onChange={(e) => setSearch(e.target.value)}
-              />
+              <Paper
+                sx={{
+                  p: "2px 4px",
+                  display: "flex",
+                  alignItems: "center",
+                  width: 400,
+                }}
+              >
+                <InputBase
+                  sx={{ ml: 1, flex: 1 }}
+                  placeholder="Search Cryptocurrencies"
+                  inputProps={{ "aria-label": "search cryptocurrencies" }}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+                <IconButton sx={{ p: "10px" }} aria-label="search">
+                  <SearchIcon />
+                </IconButton>
+              </Paper>
             </div>
           </Grid>
         </Grid>

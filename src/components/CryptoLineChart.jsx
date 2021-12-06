@@ -4,13 +4,13 @@ import { Col, Row, Typography } from "antd";
 
 const { Title } = Typography;
 
-const CryptoLineChart = ({ coinHistory, coinName, currentPrice }) => {
+const CryptoLineChart = ({ coinHistory, coinName, currentPrice,currency,currencyData,symbol }) => {
   
   const coinPrice = [];
   const coinTimestamp = [];
 
   for (let i = 0; i < coinHistory?.data?.history?.length; i += 1) {
-    coinPrice.push(coinHistory?.data?.history[i].price);
+    coinPrice.push(coinHistory?.data?.history[i].price * currencyData[currency.toLowerCase()]);
   }
 
   for (let i = 0; i < coinHistory?.data?.history?.length; i += 1) {
@@ -23,7 +23,7 @@ const CryptoLineChart = ({ coinHistory, coinName, currentPrice }) => {
     labels: coinTimestamp,
     datasets: [
       {
-        label: "Price In USD",
+        label: `Price In ${currency}`,
         data: coinPrice,
         fill: false,
         backgroundColor: "#0071bd",
@@ -54,7 +54,7 @@ const CryptoLineChart = ({ coinHistory, coinName, currentPrice }) => {
             Change: {coinHistory?.data?.change}%
           </Title>
           <Title level={5} className="current-price">
-            Current {coinName} Price: $ {currentPrice}
+            Current {coinName} Price: {symbol} {currentPrice}
           </Title>
         </Col>
       </Row>
