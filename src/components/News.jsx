@@ -1,25 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import { useGetCryptoNewsQuery } from "../services/cryptoNewsApi";
-import { Grid,Typography,Loader } from "../components";
-import { Card , Avatar } from "antd";
+import {
+  Grid,
+  Typography,
+  Loader,
+  Autocomplete,
+  TextField,
+} from "../components";
+import { Card, Avatar } from "antd";
 import moment from "moment";
+import { useGetCryptoCoinsQuery } from "../services/cryptoApi";
 
 const demoImage =
   "https://www.bing.com/th?id=OVFT.mpzuVZnv8dwIMRfQGPbOPC&pid=News";
 
 const News = ({ simplified }) => {
   const count = simplified ? 6 : 21;
-  const newsCategory = "Cryptocurrency";
+  const [newsCategory, setNewsCategory] = useState("Cryptocurrency");
   const { data: cryptoNews, isFetching } = useGetCryptoNewsQuery({
     newsCategory,
     count,
   });
-  if (!cryptoNews?.value || isFetching) return <Loader />;
+  const { data: coinData, isFetching: isFetchingCoinData } =
+    useGetCryptoCoinsQuery(100);
 
+  if (!cryptoNews?.value || isFetching || isFetchingCoinData) return <Loader />;
+  const coins = coinData?.data?.coins.map((coin) => coin.name);
+  coins.unshift("Cryptocurrency");
+  
   return (
     <React.Fragment>
-      <Grid container columnSpacing={4} rowSpacing={4} className="news-container">
-        {cryptoNews.value.map((news,index) => (
+      <Grid
+        container
+        columnSpacing={4}
+        rowSpacing={4}
+        className="news-container"
+      >
+        {!simplified && (
+          <Grid item xs={12}>
+            <Autocomplete
+              disablePortal
+              options={coins?.map((coin) => coin)}
+              sx={{ width: 300 }}
+              renderInput={(params) => (
+                <TextField {...params} label="Category" />
+              )}
+              onChange={(event, value) => setNewsCategory(value)}
+            />
+          </Grid>
+        )}
+        {cryptoNews.value.map((news, index) => (
           <Grid item xs={12} sm={6} lg={4} key={index}>
             <Card hoverable>
               <a href={news.url} target="_blank" rel="noreferrer">
@@ -46,13 +76,9 @@ const News = ({ simplified }) => {
                         demoImage
                       }
                     />
-                    <p className="provider-name">
-                      {news.provider[0]?.name}
-                    </p>
+                    <p className="provider-name">{news.provider[0]?.name}</p>
                   </div>
-                  <p>
-                    {moment(news.datePublished).startOf("ss").fromNow()}
-                  </p>
+                  <p>{moment(news.datePublished).startOf("ss").fromNow()}</p>
                 </div>
               </a>
             </Card>

@@ -34,10 +34,11 @@ const CryptoDetails = () => {
   const { data, isFetching: isCoinDataFetching } =
     useGetCryptoDetailsQuery(coinId);
 
-  const { data: coinHistory, isFetching : isHistoryFetching } = useGetCryptoHistoryQuery({
-    coinId,
-    timePeriod
-  });
+  const { data: coinHistory, isFetching: isHistoryFetching } =
+    useGetCryptoHistoryQuery({
+      coinId,
+      timePeriod,
+    });
   const { data: currencyData, isFetching: isCurrencyDataFetching } = useGetCurrencyQuery(currency);
   console.log(currencyData);
 
@@ -256,7 +257,9 @@ const CryptoDetails = () => {
           currentPrice={millify(
             cryptoDetails.price * currencyData[currency.toLowerCase()],
             {
-              precision: getReqPrecision(cryptoDetails.price),
+              precision: getReqPrecision(
+                cryptoDetails.price * currencyData[currency.toLowerCase()]
+              ),
             }
           )}
         />

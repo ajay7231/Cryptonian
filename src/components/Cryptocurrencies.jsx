@@ -23,20 +23,22 @@ const Cryptocurrencies = ({ simplified }) => {
   const [cryptos, setCryptos] = useState([]);
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("relevance");
- 
+  
 
   useEffect(() => {
     setCryptos(cryptoList?.data?.coins);
     const filteredCryptos = cryptoList?.data?.coins
-      .filter((coin) => coin.name.toLowerCase().includes(search.toLowerCase()))
-      .sort((a, b) => b[sort] - a[sort]);
+        .filter((coin) => coin.name.toLowerCase().includes(search.toLowerCase()))
+        .sort((a, b) => b[sort] - a[sort]);
+    
     
     setCryptos(filteredCryptos);
   }, [cryptoList, search, sort]);
 
-  const filters = ["relevance", "price", "marketCap", "volume"];
+  const filters = ["relevance", "price", "marketCap", "volume", "change"];
 
   if (isFetching) return <Loader />;
+  console.log(cryptoList);
   return (
     <React.Fragment>
       {!simplified ? (

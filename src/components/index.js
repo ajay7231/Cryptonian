@@ -6,6 +6,8 @@ export { default as IconButton } from "@mui/material/IconButton";
 export { default as Typography } from "@mui/material/Typography";
 export { default as Grid } from "@mui/material/Grid";
 export { default as Avatar } from "@mui/material/Avatar";
+export { default as TextField } from "@mui/material/TextField";
+export { default as Autocomplete } from "@mui/material/Autocomplete";
 
 //icons Exports
 export { default as FormControl } from "@mui/material/FormControl";

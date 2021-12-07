@@ -14,8 +14,9 @@ const CryptoLineChart = ({ coinHistory, coinName, currentPrice,currency,currency
   }
 
   for (let i = 0; i < coinHistory?.data?.history?.length; i += 1) {
+    const date = new Date(coinHistory?.data?.history[i].timestamp).toISOString().split("T");
     coinTimestamp.push(
-      new Date(coinHistory?.data?.history[i].timestamp).toLocaleDateString()
+      `${date[0]} ${date[1].slice(0,8)}`
     );
   }
 
