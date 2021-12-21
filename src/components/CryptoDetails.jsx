@@ -263,8 +263,8 @@ const CryptoDetails = () => {
             }
           )}
         />
-        <Grid item className="stats-container">
-          <Grid item className="coin-value-statistics">
+        <Grid container className="stats-container">
+          <Grid xs={12} sm={5}  item className="coin-value-statistics">
             <Grid item className="coin-value-statistics-heading">
               <Typography variant="h5" className="coin-details-heading">
                 {cryptoDetails.name} Value Statistics
@@ -286,7 +286,7 @@ const CryptoDetails = () => {
               </Grid>
             ))}
           </Grid>
-          <Grid item className="other-stats-info">
+          <Grid xs={12} sm={5}  item className="other-stats-info">
             <Grid item className="coin-value-statistics-heading">
               <Typography variant="h5" className="coin-details-heading">
                 Other Statistics

@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import {
   Cryptocurrencies,
   Home,
@@ -7,11 +8,14 @@ import {
   News,
   CryptoDetails,
   CryptoPrediction,
+  Backtotop,
 } from "./components";
 import { Layout } from "antd";
 import "./App.css";
+import MobileNavigation from "./components/MobileNavigation";
 
 const App = () => {
+  const isMobile = useMediaQuery("(max-width: 1060px)");
   return (
     <div className="app">
       <div className="navbar">
@@ -39,6 +43,10 @@ const App = () => {
             </Switch>
           </div>
         </Layout>
+      </div>
+      {!isMobile && <Backtotop/>}
+      <div className="footer">
+        {isMobile && <MobileNavigation/>}
       </div>
     </div>
   );
