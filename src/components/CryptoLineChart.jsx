@@ -51,7 +51,12 @@ const CryptoLineChart = ({ coinHistory, coinName, currentPrice,currency,currency
           {coinName} Price Chart{" "}
         </Title>
         <Col className="price-container">
-          <Title level={5} className="price-change">
+        
+          <Title
+            type={coinHistory?.data?.change < 0 ? "danger" : "success"}
+            level={5}
+            className="price-change"
+          >
             Change: {coinHistory?.data?.change}%
           </Title>
           <Title level={5} className="current-price">
@@ -59,7 +64,7 @@ const CryptoLineChart = ({ coinHistory, coinName, currentPrice,currency,currency
           </Title>
         </Col>
       </Row>
-      <Line data={data} options={options} />
+      <Line style={{ minHeight: "500px" }} data={data} options={options} />
     </>
   );
 }
