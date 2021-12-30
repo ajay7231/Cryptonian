@@ -43,11 +43,11 @@ const App = () => {
             </Switch>
           </div>
         </Layout>
-      </div>
-      {!isMobile && <Backtotop/>}
-      <div className="footer">
+        <div className="footer">
         {isMobile && <MobileNavigation/>}
       </div>
+      </div>
+      {!isMobile && <Backtotop/>}
     </div>
   );
 };

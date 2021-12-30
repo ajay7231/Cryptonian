@@ -73,7 +73,7 @@ const Cryptocurrencies = ({ simplified }) => {
                 }}
               >
                 <InputBase
-                  sx={{ ml: 1, flex: 1 }}
+                  sx={{ flex: 1 }}
                   placeholder="Search Cryptocurrencies"
                   inputProps={{ "aria-label": "search cryptocurrencies" }}
                   onChange={(e) => setSearch(e.target.value)}
