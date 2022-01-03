@@ -11,8 +11,7 @@ import { Card, Avatar } from "antd";
 import moment from "moment";
 import { useGetCryptoCoinsQuery } from "../services/cryptoApi";
 
-const demoImage =
-  "https://www.bing.com/th?id=OVFT.mpzuVZnv8dwIMRfQGPbOPC&pid=News";
+import demoImage from "../assets/defaultnewscover.jpeg"
 
 const News = ({ simplified }) => {
   const count = simplified ? 6 : 21;

@@ -27,6 +27,99 @@ import {
 import { useGetCurrencyQuery } from "../services/currencyApi";
 import { getReqPrecision } from "../services/utils";
 
+
+
+const time = ["24h", "7d", "30d", "1y", "5y"];
+
+const currencies = [
+  {
+    value: "AUD",
+    label: "Australian dollar",
+    symbol: "$",
+  },
+  {
+    value: "CAD",
+    label: "Canadian dollar",
+    symbol: "$",
+  },
+  {
+    value: "CHF",
+    label: "Swiss franc",
+    symbol: "Fr",
+  },
+  {
+    value: "CNY",
+    label: "Chinese yuan",
+    symbol: "¥",
+  },
+  {
+    value: "EUR",
+    label: "Euro",
+    symbol: "€",
+  },
+  {
+    value: "GBP",
+    label: "British pound",
+    symbol: "£",
+  },
+  {
+    value: "HKD",
+    label: "Hong Kong dollar",
+    symbol: "$",
+  },
+  {
+    value: "INR",
+    label: "Indian rupee",
+    symbol: "₹",
+  },
+  {
+    value: "JPY",
+    label: "Japanese yen",
+    symbol: "¥",
+  },
+  {
+    value: "KRW",
+    label: "South Korean won",
+    symbol: "₩",
+  },
+  {
+    value: "MXN",
+    label: "Mexican peso",
+    symbol: "$",
+  },
+  {
+    value: "NOK",
+    label: "Norwegian krone",
+    symbol: "kr",
+  },
+  {
+    value: "NZD",
+    label: "New Zealand dollar",
+    symbol: "$",
+  },
+  {
+    value: "SEK",
+    label: "Swedish krona",
+    symbol: "kr",
+  },
+  {
+    value: "SGD",
+    label: "Singapore dollar",
+    symbol: "$",
+  },
+  {
+    value: "USD",
+    label: "United States dollar",
+    symbol: "$",
+  },
+];
+
+/**
+ * 
+ * @returns {React.Component}
+ */
+
+
 const CryptoDetails = () => {
   const { coinId } = useParams();
   const [timePeriod, setTimePeriod] = useState("7d");
@@ -34,101 +127,19 @@ const CryptoDetails = () => {
   const { data, isFetching: isCoinDataFetching } =
     useGetCryptoDetailsQuery(coinId);
 
-  const { data: coinHistory, isFetching: isHistoryFetching } =
+  const { data: coinHistory,isError: errorOnCoinHistoryFetching,isFetching: isHistoryFetching } =
     useGetCryptoHistoryQuery({
       coinId,
       timePeriod,
     });
-  const { data: currencyData, isFetching: isCurrencyDataFetching } = useGetCurrencyQuery(currency);
-  console.log(currencyData);
+  
+  const { data: currencyData,isError:errorOnCurrencyFetching, isFetching: isCurrencyDataFetching } = useGetCurrencyQuery(currency);
 
   const cryptoDetails = data?.data?.coin;
-  // console.log(cryptoDetails);
-  const time = ["24h", "7d", "30d", "1y", "5y"];
-  const getSymbol = (currency) => currencies.find((elem) => elem.value === currency).symbol;
-  const currencies = [
-    {
-      value: "USD",
-      label: "United States dollar",
-      symbol:'$'
-    },
-    {
-      value: "EUR",
-      label: "Euro",
-      symbol:'€'
-    },
-    {
-      value: "GBP",
-      label: "British pound",
-      symbol:'£'
-    },
-    {
-      value: "CAD",
-      label: "Canadian dollar",
-      symbol:'$'
-    },
-    {
-      value: "AUD",
-      label: "Australian dollar",
-      symbol:'$'
-    },
-    {
-      value: "JPY",
-      label: "Japanese yen",
-      symbol:'¥'
-    },
-    {
-      value: "CHF",
-      label: "Swiss franc",
-      symbol:'Fr'
-    },
-    {
-      value: "CNY",
-      label: "Chinese yuan",
-      symbol:'¥'
-    },
-    {
-      value: "INR",
-      label: "Indian rupee",
-      symbol:'₹'
-    },
-    {
-      value: "HKD",
-      label: "Hong Kong dollar",
-      symbol:'$'
-    },
-    {
-      value: "NZD",
-      label: "New Zealand dollar",
-      symbol:'$'
-    },
-    {
-      value: "SEK",
-      label: "Swedish krona",
-      symbol:'kr'
-    },
-    {
-      value: "KRW",
-      label: "South Korean won",
-      symbol:'₩'
-    },
-    {
-      value: "SGD",
-      label: "Singapore dollar",
-      symbol:'$'
-    },
-    {
-      value: "NOK",
-      label: "Norwegian krone",
-      symbol:'kr'
-    },
-    {
-      value: "MXN",
-      label: "Mexican peso",
-      symbol:'$'
-    },
 
-  ].sort((a, b) => (a.label > b.label ? 1 : -1));
+
+  const getSymbol = (currency) => currencies.find((elem) => elem.value === currency).symbol;
+  
 
   if (isCoinDataFetching || isHistoryFetching || isCurrencyDataFetching) return <Loader/>;
   const stats = [
