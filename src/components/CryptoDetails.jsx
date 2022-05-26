@@ -27,10 +27,100 @@ import {
 import { useGetCurrencyQuery } from "../services/currencyApi";
 import { getReqPrecision } from "../services/utils";
 
+const time = ["3h", "24h", "7d", "30d", "3m", "1y", "3y", "5y"];
+
+const currencies = [
+  {
+    value: "AUD",
+    label: "Australian dollar",
+    symbol: "$",
+  },
+  {
+    value: "CAD",
+    label: "Canadian dollar",
+    symbol: "$",
+  },
+  {
+    value: "CHF",
+    label: "Swiss franc",
+    symbol: "Fr",
+  },
+  {
+    value: "CNY",
+    label: "Chinese yuan",
+    symbol: "¥",
+  },
+  {
+    value: "EUR",
+    label: "Euro",
+    symbol: "€",
+  },
+  {
+    value: "GBP",
+    label: "British pound",
+    symbol: "£",
+  },
+  {
+    value: "HKD",
+    label: "Hong Kong dollar",
+    symbol: "$",
+  },
+  {
+    value: "INR",
+    label: "Indian rupee",
+    symbol: "₹",
+  },
+  {
+    value: "JPY",
+    label: "Japanese yen",
+    symbol: "¥",
+  },
+  {
+    value: "KRW",
+    label: "South Korean won",
+    symbol: "₩",
+  },
+  {
+    value: "MXN",
+    label: "Mexican peso",
+    symbol: "$",
+  },
+  {
+    value: "NOK",
+    label: "Norwegian krone",
+    symbol: "kr",
+  },
+  {
+    value: "NZD",
+    label: "New Zealand dollar",
+    symbol: "$",
+  },
+  {
+    value: "SEK",
+    label: "Swedish krona",
+    symbol: "kr",
+  },
+  {
+    value: "SGD",
+    label: "Singapore dollar",
+    symbol: "$",
+  },
+  {
+    value: "USD",
+    label: "United States dollar",
+    symbol: "$",
+  },
+];
+
+/**
+ *
+ * @returns {React.Component}
+ */
+
 const CryptoDetails = () => {
   const { coinId } = useParams();
   const [timePeriod, setTimePeriod] = useState("7d");
-  const [currency,setCurrency] = useState("USD");
+  const [currency, setCurrency] = useState("USD");
   const { data, isFetching: isCoinDataFetching } =
     useGetCryptoDetailsQuery(coinId);
 
@@ -39,98 +129,18 @@ const CryptoDetails = () => {
       coinId,
       timePeriod,
     });
-  const { data: currencyData, isFetching: isCurrencyDataFetching } = useGetCurrencyQuery(currency);
-  console.log(currencyData);
+
+  const { data: currencyData, isFetching: isCurrencyDataFetching } =
+    useGetCurrencyQuery(currency);
 
   const cryptoDetails = data?.data?.coin;
-  // console.log(cryptoDetails);
-  const time = ["24h", "7d", "30d", "1y", "5y"];
-  const getSymbol = (currency) => currencies.find((elem) => elem.value === currency).symbol;
-  const currencies = [
-    {
-      value: "USD",
-      label: "United States dollar",
-      symbol:'$'
-    },
-    {
-      value: "EUR",
-      label: "Euro",
-      symbol:'€'
-    },
-    {
-      value: "GBP",
-      label: "British pound",
-      symbol:'£'
-    },
-    {
-      value: "CAD",
-      label: "Canadian dollar",
-      symbol:'$'
-    },
-    {
-      value: "AUD",
-      label: "Australian dollar",
-      symbol:'$'
-    },
-    {
-      value: "JPY",
-      label: "Japanese yen",
-      symbol:'¥'
-    },
-    {
-      value: "CHF",
-      label: "Swiss franc",
-      symbol:'Fr'
-    },
-    {
-      value: "CNY",
-      label: "Chinese yuan",
-      symbol:'¥'
-    },
-    {
-      value: "INR",
-      label: "Indian rupee",
-      symbol:'₹'
-    },
-    {
-      value: "HKD",
-      label: "Hong Kong dollar",
-      symbol:'$'
-    },
-    {
-      value: "NZD",
-      label: "New Zealand dollar",
-      symbol:'$'
-    },
-    {
-      value: "SEK",
-      label: "Swedish krona",
-      symbol:'kr'
-    },
-    {
-      value: "KRW",
-      label: "South Korean won",
-      symbol:'₩'
-    },
-    {
-      value: "SGD",
-      label: "Singapore dollar",
-      symbol:'$'
-    },
-    {
-      value: "NOK",
-      label: "Norwegian krone",
-      symbol:'kr'
-    },
-    {
-      value: "MXN",
-      label: "Mexican peso",
-      symbol:'$'
-    },
 
-  ].sort((a, b) => (a.label > b.label ? 1 : -1));
+  const getSymbol = (currency) =>
+    currencies.find((elem) => elem.value === currency).symbol;
 
-  if (isCoinDataFetching || isHistoryFetching || isCurrencyDataFetching) return <Loader/>;
+  if (isCoinDataFetching || isHistoryFetching || isCurrencyDataFetching)
+    return <Loader />;
+  // console.log(cryptoDetails["24hVolume"]);
   const stats = [
     {
       title: `Price to ${currency}`,
@@ -150,8 +160,10 @@ const CryptoDetails = () => {
     {
       title: "24h Volume",
       value: `${getSymbol(currency)} ${
-        cryptoDetails.volume &&
-        millify(cryptoDetails.volume * currencyData[currency.toLowerCase()])
+        cryptoDetails["24hVolume"] &&
+        millify(
+          parseInt(cryptoDetails["24hVolume"]) * currencyData[currency.toLowerCase()]
+        )
       }`,
       icon: <BoltOutlinedIcon />,
     },
@@ -192,20 +204,6 @@ const CryptoDetails = () => {
       ),
       icon: <ErrorOutlineOutlinedIcon />,
     },
-    {
-      title: "Total Supply",
-      value: `${getSymbol(currency)} ${millify(
-        cryptoDetails.totalSupply * currencyData[currency.toLowerCase()]
-      )}`,
-      icon: <ErrorOutlineOutlinedIcon />,
-    },
-    {
-      title: "Circulating Supply",
-      value: `${getSymbol(currency)} ${millify(
-        cryptoDetails.circulatingSupply * currencyData[currency.toLowerCase()]
-      )}`,
-      icon: <ErrorOutlineOutlinedIcon />,
-    },
   ];
 
   return (
@@ -213,7 +211,7 @@ const CryptoDetails = () => {
       <Grid item className="coin-detail-container">
         <Grid item className="coin-heading-container">
           <Typography variant="h3" className="coin-name">
-            {cryptoDetails.name} ({cryptoDetails.slug.split("-")[1]}) Price
+            {cryptoDetails.name} ({cryptoDetails.symbol}) Price
           </Typography>
           <p>
             {cryptoDetails.name} live price in {currency}. View value
@@ -264,7 +262,7 @@ const CryptoDetails = () => {
           )}
         />
         <Grid container className="stats-container">
-          <Grid xs={12} sm={5}  item className="coin-value-statistics">
+          <Grid xs={12} sm={5} item className="coin-value-statistics">
             <Grid item className="coin-value-statistics-heading">
               <Typography variant="h5" className="coin-details-heading">
                 {cryptoDetails.name} Value Statistics
@@ -286,7 +284,7 @@ const CryptoDetails = () => {
               </Grid>
             ))}
           </Grid>
-          <Grid xs={12} sm={5}  item className="other-stats-info">
+          <Grid xs={12} sm={5} item className="other-stats-info">
             <Grid item className="coin-value-statistics-heading">
               <Typography variant="h5" className="coin-details-heading">
                 Other Statistics

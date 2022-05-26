@@ -1,5 +1,6 @@
-import React from 'react'
+import React from "react";
 import BottomNavigation from "@mui/material/BottomNavigation";
+import { Link } from "react-router-dom";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import Paper from "@mui/material/Paper";
 import HomeIcon from "@mui/icons-material/Home";
@@ -7,9 +8,9 @@ import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import ArticleIcon from "@mui/icons-material/Article";
 import StackedLineChartIcon from "@mui/icons-material/StackedLineChart";
 
-
-const MobileNavigation = (props) => {
-  const pathName = ['/', '/cryptocurrencies', '/news', '/prediction']
+const MobileNavigation = () => {
+  const pathName = ["/", "/cryptocurrencies", "/news", "/prediction"];
+  
   return (
     <>
       <Paper
@@ -21,27 +22,36 @@ const MobileNavigation = (props) => {
           showLabels
           value={pathName.indexOf(window.location.pathname)}
         >
-          <BottomNavigationAction href="/" label="Home" icon={<HomeIcon />} />
+          <BottomNavigationAction
+            component={Link}
+            to="/"
+            label="Home"
+            href="/"
+            icon={<HomeIcon />}
+          />
 
           <BottomNavigationAction
+            component={Link}
             label="Cryptocurrenies"
-            href="/cryptocurrencies"
+            to="/cryptocurrencies"
             icon={<MonetizationOnIcon />}
           />
           <BottomNavigationAction
-            href="/news"
+            component={Link}
+            to="/news"
             label="News"
             icon={<ArticleIcon />}
           />
           <BottomNavigationAction
+            component={Link}
             label="Prediction"
-            href="/prediction"
+            to="/prediction"
             icon={<StackedLineChartIcon />}
           />
         </BottomNavigation>
       </Paper>
     </>
   );
-}
+};
 
-export default MobileNavigation
+export default MobileNavigation;

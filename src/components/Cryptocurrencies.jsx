@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Grid, FormControl, InputLabel, MenuSelect, MenuItem } from "../components";
+import {
+  Grid,
+  FormControl,
+  InputLabel,
+  MenuSelect,
+  MenuItem,
+} from "../components";
 import Paper from "@mui/material/Paper";
+
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
@@ -23,15 +30,14 @@ const Cryptocurrencies = ({ simplified }) => {
   const [cryptos, setCryptos] = useState([]);
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("relevance");
-  
 
   useEffect(() => {
-    setCryptos(cryptoList?.data?.coins);
+    setCryptos(cryptoList?.data?.coins.slice(0, 10));
     const filteredCryptos = cryptoList?.data?.coins
-        .filter((coin) => coin.name.toLowerCase().includes(search.toLowerCase()))
-        .sort((a, b) => b[sort] - a[sort]);
-    
-    
+      .slice(0, simplified ? 10 : 100)
+      .filter((coin) => coin.name.toLowerCase().includes(search.toLowerCase()))
+      .sort((a, b) => b[sort] - a[sort]);
+
     setCryptos(filteredCryptos);
   }, [cryptoList, search, sort]);
 
@@ -73,7 +79,7 @@ const Cryptocurrencies = ({ simplified }) => {
                 }}
               >
                 <InputBase
-                  sx={{ ml: 1, flex: 1 }}
+                  sx={{ flex: 1 }}
                   placeholder="Search Cryptocurrencies"
                   inputProps={{ "aria-label": "search cryptocurrencies" }}
                   onChange={(e) => setSearch(e.target.value)}
@@ -98,13 +104,13 @@ const Cryptocurrencies = ({ simplified }) => {
         {cryptos?.map((crypto) => (
           <Grid
             item
-            key={crypto.id}
+            key={crypto.uuid}
             xs={12}
             sm={6}
             lg={3}
             className="crypto-card"
           >
-            <Link to={`/crypto/${crypto.id}`}>
+            <Link to={`/crypto/${crypto.uuid}`}>
               <Card
                 title={`${crypto.rank}. ${crypto.name}`}
                 extra={

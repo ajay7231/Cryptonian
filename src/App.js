@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {
@@ -43,11 +43,11 @@ const App = () => {
             </Switch>
           </div>
         </Layout>
-      </div>
-      {!isMobile && <Backtotop/>}
-      <div className="footer">
+        <div className="footer">
         {isMobile && <MobileNavigation/>}
       </div>
+      </div>
+      {!isMobile && <Backtotop/>}
     </div>
   );
 };

@@ -11,9 +11,7 @@ const store = configureStore({
   },
   middelware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
-      .concat(cryptoApi.middleware)
-      .concat(cryptoNewsApi.middleware)
-      .concat(currencyApi.middleware),
+      .concat(cryptoApi.middleware, cryptoNewsApi.middleware, currencyApi.middleware),
 });
 setupListeners(store.dispatch);
 

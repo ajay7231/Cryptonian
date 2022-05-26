@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { MenuIcon, CloseIcon } from "../components";
+import { Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 const Navbar = () => {
@@ -11,7 +12,9 @@ const Navbar = () => {
 
   return (
     <nav className="navbar-items">
-      <h1 className="navbar-logo">Cryptonian</h1>
+      <h1 className="navbar-logo" onClick={Navigate("/home")}>
+        Cryptonian
+      </h1>
       <img className="logo" src={logo} alt="logo" />
       <div className="menu-icon" onClick={() => handleClick()}>
         {menu ? <MenuIcon /> : <CloseIcon />}

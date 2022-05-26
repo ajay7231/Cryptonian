@@ -6,8 +6,9 @@ import { Typography, Grid, Cryptocurrencies,News, Loader } from "../components";
 import { Statistic } from "antd";
 
 const Home = () => {
-  const { data, isFetching } = useGetCryptoCoinsQuery(10);
-  const globalStats = data?.data?.stats;
+  const { data, isFetching } = useGetCryptoCoinsQuery(20);
+  // const data?.dat = data?.data?.stats;
+  if (!isFetching) console.log(data);
   if (isFetching) return <Loader/>;
   return (
     <React.Fragment>
@@ -16,30 +17,30 @@ const Home = () => {
       </Typography>
       <Grid container spacing={2} className="home-stats">
         <Grid item xs={6}>
-          <Statistic title="Total Cryptocurrencies" value={globalStats.total} />
+          <Statistic title="Total Cryptocurrencies" value={data?.data?.stats?.total} />
         </Grid>
         <Grid item xs={6}>
           <Statistic
             title="Total Exchanges"
-            value={millify(globalStats.totalExchanges)}
+            value={millify(data?.data?.stats?.totalExchanges)}
           />
         </Grid>
         <Grid item xs={6}>
           <Statistic
             title="Total Market Cap"
-            value={millify(globalStats.totalMarketCap)}
+            value={millify(data?.data?.stats?.totalMarketCap)}
           />
         </Grid>
         <Grid item xs={6}>
           <Statistic
             title="Total 24h Volume"
-            value={millify(globalStats.total24hVolume)}
+            value={millify(data?.data?.stats?.total24hVolume)}
           />
         </Grid>
         <Grid item xs={6}>
           <Statistic
             title="Total Markets"
-            value={millify(globalStats.totalMarkets)}
+            value={millify(data?.data?.stats?.totalMarkets)}
           />
         </Grid>
       </Grid>
