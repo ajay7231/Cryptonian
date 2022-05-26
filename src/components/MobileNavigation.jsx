@@ -8,7 +8,7 @@ import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import ArticleIcon from "@mui/icons-material/Article";
 import StackedLineChartIcon from "@mui/icons-material/StackedLineChart";
 
-const MobileNavigation = (props) => {
+const MobileNavigation = () => {
   const pathName = ["/", "/cryptocurrencies", "/news", "/prediction"];
   
   return (
