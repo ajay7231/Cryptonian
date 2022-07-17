@@ -1,6 +1,6 @@
 import React from "react";
 import BottomNavigation from "@mui/material/BottomNavigation";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import Paper from "@mui/material/Paper";
 import HomeIcon from "@mui/icons-material/Home";
@@ -10,7 +10,8 @@ import StackedLineChartIcon from "@mui/icons-material/StackedLineChart";
 
 const MobileNavigation = () => {
   const pathName = ["/", "/cryptocurrencies", "/news", "/prediction"];
-  
+  const location = useLocation();
+
   return (
     <>
       <Paper
@@ -20,7 +21,8 @@ const MobileNavigation = () => {
         <BottomNavigation
           style={{ marginTop: "10px" }}
           showLabels
-          value={pathName.indexOf(window.location.pathname)}
+          // value={pathName.indexOf(location.pathname)}
+          value={1}
         >
           <BottomNavigationAction
             component={Link}

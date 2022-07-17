@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {
   Cryptocurrencies,
@@ -24,30 +24,30 @@ const App = () => {
       <div className="main">
         <Layout>
           <div className="routes">
-            <Switch>
-              <Route exact path="/">
-                <Home />
-              </Route>
-              <Route exact path="/cryptocurrencies">
-                <Cryptocurrencies />
-              </Route>
-              <Route exact path="/crypto/:coinId">
-                <CryptoDetails />
-              </Route>
-              <Route exact path="/news">
-                <News />
-              </Route>
-              <Route exact path="/prediction">
-                <CryptoPrediction />
-              </Route>
-            </Switch>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              {/* <Home /> */}
+              {/* </Route> */}
+              <Route
+                exact
+                path="cryptocurrencies"
+                element={<Cryptocurrencies />}
+              />
+              {/* <Cryptocurrencies /> */}
+              {/* </Route> */}
+              <Route path="crypto/:coinId" element={<CryptoDetails />} />
+              {/* <CryptoDetails /> */}
+              <Route path="news" element={<News />} />
+              {/* <News /> */}
+
+              <Route path="prediction" element={<CryptoPrediction />} />
+              {/* <CryptoPrediction /> */}
+            </Routes>
           </div>
         </Layout>
-        <div className="footer">
-        {isMobile && <MobileNavigation/>}
+        <div className="footer">{isMobile && <MobileNavigation />}</div>
       </div>
-      </div>
-      {!isMobile && <Backtotop/>}
+      {!isMobile && <Backtotop />}
     </div>
   );
 };
