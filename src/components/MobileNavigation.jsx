@@ -21,8 +21,7 @@ const MobileNavigation = () => {
         <BottomNavigation
           style={{ marginTop: "10px" }}
           showLabels
-          // value={pathName.indexOf(location.pathname)}
-          value={1}
+          value={pathName.indexOf(location.pathname)}
         >
           <BottomNavigationAction
             component={Link}
